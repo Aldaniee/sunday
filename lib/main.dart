@@ -1,33 +1,72 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
+import 'package:redux/redux.dart';
+import 'package:sunday/src/util/router.dart';
+
+const List<DeviceOrientation> kPortraitOrientations = <DeviceOrientation>[
+  DeviceOrientation.portraitDown,
+  DeviceOrientation.portraitUp,
+];
+const List<DeviceOrientation> kLandscapeOrientations = <DeviceOrientation>[
+  DeviceOrientation.landscapeLeft,
+  DeviceOrientation.landscapeRight,
+];
+
+Future<void> main() async {
+  await runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      WidgetsBinding.instance.deferFirstFrame();
+      await SystemChrome.setPreferredOrientations(kPortraitOrientations);
+
+      final GetIt getIt = await init();
+      runApp(SundayApp(getIt: getIt));
+      WidgetsBinding.instance.allowFirstFrame();
+    },
+    (Object error, StackTrace stackTrace) {
+      // ignore: only_throw_errors
+      throw error;
+    },
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SundayApp extends StatefulWidget {
+  const SundayApp({super.key, required this.getIt});
 
-  // This widget is the root of your application.
+  final GetIt getIt;
+
+  @override
+  State<SundayApp> createState() => _SundayAppState();
+}
+
+class _SundayAppState extends State<SundayApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    final AppRouter router = widget.getIt.get<AppRouter>();
+    return Provider<GetIt>(
+      create: (BuildContext context) => widget.getIt,
+      builder: (BuildContext context, _) {
+        return StoreProvider<AppState>(
+          store: widget.getIt.get<Store<AppState>>(),
+          child: OverlaySupport(
+            child: MaterialApp.router(
+              theme: theme.crewLabTheme,
+              routeInformationProvider: router.routeInfoProvider(),
+              routeInformationParser: router.defaultRouteParser(),
+              routerDelegate: router.delegate(),
+            ),
+          ),
+        );
+      },
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

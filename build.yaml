@@ -1,0 +1,27 @@
+targets:
+  $default:
+    builders:
+      json_serializable|json_serializable:
+        generate_for:
+          - "**/models/**.dart"
+      freezed|freezed:
+        generate_for:
+          - "**/actions/**.dart"
+          - "**/data/models/**.dart"
+          - "**/models/**.dart"
+          - "**/containers/**.dart"
+        options:
+          maybe_when: false
+          maybe_map: false
+      auto_route_generator|autoRouteGenerator:
+        generate_for:
+          - "**/util/router.dart"
+      injectable_generator|injectable_builder:
+        generate_for:
+          - "**/data/**.dart"
+          - "**/epics/**.dart"
+          - "**/middleware/**.dart"
+          - "**/util/router.dart"
+      injectable_generator|injectable_config_builder:
+        generate_for:
+          - "**/util/injection.dart"
