@@ -242,6 +242,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "injectable",
+      "rootUri": "file:///Users/aidanlee/.pub-cache/hosted/pub.dev/injectable-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "injectable_generator",
+      "rootUri": "file:///Users/aidanlee/.pub-cache/hosted/pub.dev/injectable_generator-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "io",
       "rootUri": "file:///Users/aidanlee/.pub-cache/hosted/pub.dev/io-1.0.4",
       "packageUri": "lib/",
@@ -404,6 +416,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "recase",
+      "rootUri": "file:///Users/aidanlee/.pub-cache/hosted/pub.dev/recase-4.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "redux",
       "rootUri": "file:///Users/aidanlee/.pub-cache/hosted/pub.dev/redux-5.0.0",
       "packageUri": "lib/",
@@ -560,7 +578,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-02-11T22:12:15.983188Z",
+  "generated": "2023-02-12T18:10:59.733997Z",
   "generator": "pub",
   "generatorVersion": "2.19.1"
 }

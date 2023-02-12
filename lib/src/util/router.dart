@@ -1,6 +1,6 @@
-import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
+import 'package:injectable/injectable.dart';
+import 'package:sunday/src/home.dart';
 import 'package:sunday/src/presentation/home/root.dart';
 
 part 'router.gr.dart';
@@ -26,3 +26,7 @@ part 'router.gr.dart';
     ),
   ],
 )
+class AppRouter extends _$AppRouter {
+  AppRouter();
+}
+

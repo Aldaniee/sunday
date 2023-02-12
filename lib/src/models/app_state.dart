@@ -3,7 +3,7 @@ part of models;
 @freezed
 class AppState with _$AppState {
   const factory AppState({
-    @Default()
+    @Default(<String>{}) Set<String> pendingActions,
+    @Default(GoalsState()) GoalsState goals,
   }) = AppState$;
-
 }
